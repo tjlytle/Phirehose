@@ -58,7 +58,8 @@ abstract class Phirehose
   protected $readTimeout = 5;
   protected $idleReconnectTimeout = 90;
   protected $avgPeriod = 60;
-
+  protected $status_length_base = 10;
+  
   /**
    * Create a new Phirehose object attached to the appropriate twitter stream method. 
    * Methods are: METHOD_FIREHOSE, METHOD_RETWEET, METHOD_SAMPLE, METHOD_FILTER
@@ -307,7 +308,7 @@ abstract class Phirehose
         // Read status length delimiter
         $delimiter = substr($this->buff, 0, $eol);
         $this->buff = substr($this->buff, $eol + 2); // consume off buffer, + 2 = "\r\n"
-        $statusLength = intval($delimiter);
+        $statusLength = intval($delimiter, $this->status_length_base);
         if ($statusLength > 0) {
           // Read status bytes and enqueue
           $bytesLeft = $statusLength - strlen($this->buff);
