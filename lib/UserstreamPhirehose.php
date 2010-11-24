@@ -1,6 +1,6 @@
 <?php
 
-class UserstreamPhirehose extends Phirehose {
+abstract class UserstreamPhirehose extends Phirehose {
 
 	const URL_BASE         = 'https://userstream.twitter.com/2/';
 	const METHOD_USER      = 'user';
@@ -500,4 +500,3 @@ class UserstreamPhirehose extends Phirehose {
         }
         
 }
-	}
